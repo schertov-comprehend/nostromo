@@ -1,0 +1,2 @@
+# nostromo
+Sample scala project

@@ -33,19 +33,27 @@ object Server extends App with JsonSupport {
       }
     } ~
       path("hello") {
-    get {
-      println("Got GET")
-      complete("Hello, World!")
-    } ~
-    post {
-      println("Got POST")
-      complete("U r fine")
-      entity(as[Name]) {
-          item => complete("OK. U r fine: " + item.name)
-      }
+        get {
+          println("Got GET")
+          complete("Hello, World!")
+        } ~
+        post {
+          println("Got POST")
+          complete("U r fine")
+          entity(as[Name]) {
+              item => complete("OK. U r fine: " + item.name)
+          }
 
+        }
+    } ~ path("test") {
+      get {
+        pathEndOrSingleSlash {
+          getFromResource("prod/button.js")
+      } ~ {
+        getFromResourceDirectory("./prod")
+      }
+      }
     }
-  }
 
   val bindingFuture = Http().bindAndHandle(route, host, port)
 

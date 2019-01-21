@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-class MyApp extends Component {
+const e = React.createElement;
+class MyApp extends React.Component {
   constructor(props) {
     super(props);
     this.state = { name: '', hey:''}
@@ -16,9 +16,6 @@ class MyApp extends Component {
   	}
 	render() {
 	  return (
-
-
-		  <div>
 		     <div>
 	             <form onSubmit={this.handleSubmit}>
 	        	<label>Hello world, what’s your name:
@@ -26,12 +23,12 @@ class MyApp extends Component {
 	        	</label>
 	        	<input type="submit" value="Go" />
 	      	     </form>
-	             </div>
-		     <div><h1>{this.state.hey}</h1></div>
-		  </div>
+
+		     <label>{this.state.hey}</label></div>
 	  )
 	}
 
 }
 
-export default MyApp;
+const domContainer = document.querySelector('#like_button_container');
+ReactDOM.render(e(MyApp), domContainer);

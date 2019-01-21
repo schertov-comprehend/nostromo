@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-class MyApp extends Component {
+
+class App extends Component {
   constructor(props) {
     super(props);
     this.state = { name: '', hey:''}
@@ -16,22 +17,20 @@ class MyApp extends Component {
   	}
 	render() {
 	  return (
-
-
-		  <div>
-		     <div>
-	             <form onSubmit={this.handleSubmit}>
-	        	<label>Hello world, what’s your name:
-	          		<input id="name" value={this.state.value} onChange={this.handleChange} />
-	        	</label>
-	        	<input type="submit" value="Go" />
-	      	     </form>
-	             </div>
-		     <div><h1>{this.state.hey}</h1></div>
-		  </div>
+	  <div>
+	     <div>
+             <form onSubmit={this.handleSubmit}>
+        	<label>Name:
+          		<input id="name" value={this.state.value} onChange={this.handleChange} />
+        	</label>
+        	<input type="submit" value="Go" />
+      	     </form>
+             </div>
+	     <div><h1>{this.state.hey}</h1></div>
+	  </div>
 	  )
 	}
 
 }
 
-export default MyApp;
+export default App;

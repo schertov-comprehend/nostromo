@@ -24,7 +24,15 @@ object Server extends App with JsonSupport {
   implicit val executor: ExecutionContext = system.dispatcher
   implicit val materializer: ActorMaterializer = ActorMaterializer()
 
-  def route = path("hello") {
+  def route =
+    get {
+      pathEndOrSingleSlash {
+        getFromResource("build/index.html")
+      } ~ {
+        getFromResourceDirectory("./build")
+      }
+    } ~
+      path("hello") {
     get {
       println("Got GET")
       complete("Hello, World!")
@@ -38,6 +46,7 @@ object Server extends App with JsonSupport {
 
     }
   }
+
   val bindingFuture = Http().bindAndHandle(route, host, port)
 
   bindingFuture.onComplete {

@@ -18,33 +18,28 @@ object Server extends App with JsonSupport {
   //Init
   val host = "0.0.0.0"
   val port = 9000
-
+  val resPath ="build";
 
   implicit val system: ActorSystem = ActorSystem("nostromo")
   implicit val executor: ExecutionContext = system.dispatcher
   implicit val materializer: ActorMaterializer = ActorMaterializer()
 
   def route =
-    get {
-      pathEndOrSingleSlash {
-        getFromResource("build/index.html")
-      } ~ {
-        getFromResourceDirectory("./build")
-      }
-    } ~
-      path("hello") {
-    get {
-      println("Got GET")
-      complete("Hello, World!")
-    } ~
-    post {
-      println("Got POST")
-      complete("U r fine")
-      entity(as[Name]) {
-          item => complete("OK. U r fine: " + item.name)
-      }
-
+    path("hello") {
+      get {
+        {
+          println("Got GET")
+          getFromResource(s"$resPath/index.html")
+        }
+      } ~
+      post {
+        println("Got POST")
+        entity(as[Name]) {
+            item => complete(s"<div>Welcome to the system, ${item.name} </div>")
+        }
     }
+  } ~ pathPrefix("static") {
+      getFromResourceDirectory(s"$resPath/static")
   }
 
   val bindingFuture = Http().bindAndHandle(route, host, port)

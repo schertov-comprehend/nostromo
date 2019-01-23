@@ -32,14 +32,14 @@ class App extends Component {
 	  return (
 	  <div>
 	     <div>
-             <form onSubmit={this.handleSubmit}>
-	        	<label>Hello world, what’s your name:
-	          		<input id="name" value={this.state.value} onChange={this.handleChange} />
-	        	</label>
-        		<input type="submit" value="Go" />
-      	     </form>
-             </div>
-	     <div dangerouslySetInnerHTML={this.state.greeting}/>
+          <form onSubmit={this.handleSubmit}>
+	        	<label id="greeting">Hello world, what’s your name:</label>
+	          	<input id="name" value={this.state.value} onChange={this.handleChange} />
+	        	
+        		<input id="goButton" type="submit" value="Go" />
+      		</form>
+        </div>
+	     	<div id="result" dangerouslySetInnerHTML={this.state.greeting}/>
 	  </div>
 	  )
 	}

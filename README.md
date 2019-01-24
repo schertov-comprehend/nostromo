@@ -8,8 +8,9 @@ $ sbt
 > project letsfly
 > compile
 > docker:publishLocal
+$ cd ..
+$ docker run -p 9000:9000 -it -d letsfly:0.1
+$ cd qa
+$ cucumber features/nostromo.feature
+$ curl localhost:9000/hello
 
-docker run -p 9000:9000 -it -d letsfly:0.1
-
-curl localhost:9000/hello
-```

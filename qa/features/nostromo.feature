@@ -10,7 +10,7 @@ Feature: Hello Page
 
    Scenario: Verify Post Request
     Given I am on the start page
-    And I typed 'Dear user' into input field
-    When I clicked go button
-    Then I should see 'Welcome to the system Dear user'
+    When I typed 'Dear user' into input field
+    And I clicked go button
+    Then I should see 'Welcome to the system, Dear user'
 
